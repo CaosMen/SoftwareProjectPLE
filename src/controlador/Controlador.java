@@ -192,7 +192,7 @@ public class Controlador {
         System.out.println("");
     }
 
-    public String[] parseDate(String date) {
+    public String[] splitDate(String date) {
         return date.split("/");
     }
 
@@ -204,11 +204,11 @@ public class Controlador {
 
         if (laboratorio.procurarProjeto(titulo) == null) {
             System.out.print("Digite a Data de Ínicio do Projeto (Formato: dd/MM/yyyy): ");
-            String[] dataInicioString = this.parseDate(reader.nextLine());
+            String[] dataInicioString = this.splitDate(reader.nextLine());
             LocalDate dataInicio = LocalDate.of(Integer.parseInt(dataInicioString[2]), Integer.parseInt(dataInicioString[1]), Integer.parseInt(dataInicioString[0]));
 
             System.out.print("Digite a Data de Termino do Projeto (Formato: dd/MM/yyyy): ");
-            String[] dataTerminoString = this.parseDate(reader.nextLine());
+            String[] dataTerminoString = this.splitDate(reader.nextLine());
             LocalDate dataTermino = LocalDate.of(Integer.parseInt(dataTerminoString[2]), Integer.parseInt(dataTerminoString[1]), Integer.parseInt(dataTerminoString[0]));
 
             System.out.print("Digite o nome da Agência Financiadora do Projeto: ");
@@ -469,5 +469,104 @@ public class Controlador {
         } else {
             System.out.println("Adicione no mínimo um colaborador para adicionar uma Publicação!");
         }
+    }
+
+    public void adicionarOrientacao(Scanner reader, Laboratorio laboratorio) {
+        System.out.println("Adicionar uma Orientação!\n");
+
+        System.out.print("Digite o nome do Orientador: ");
+        String nomeOrientador = reader.nextLine();
+
+        Colaborador orientador = laboratorio.procurarColaborador(nomeOrientador);
+
+        if (orientador != null) {
+            if (orientador instanceof Professor) {
+                Professor professor = (Professor)orientador;
+                
+                System.out.print("Digite o nome do Orientando: ");
+                String nomeOrientando = reader.nextLine();
+
+                Colaborador orientando = laboratorio.procurarColaborador(nomeOrientando);
+
+                if (orientando != null) {
+                    if (orientando instanceof Aluno) {
+                        Aluno aluno = (Aluno)orientando;
+
+                        aluno.setOrientador(professor);
+                        professor.addOrientandos(aluno);
+
+                        System.out.println("\nOrientação Adicionada!");
+                    } else {
+                        System.out.println("\nO orientando deve ser um Aluno!");
+                    }
+                } else {
+                    System.out.println("\nNão foi encontrado nenhum colaborador com este nome!");
+                }
+            } else {
+                System.out.println("\nO colaborador não é um professor!");
+            }
+        } else {
+            System.out.println("\nNão foi encontrado nenhum colaborador com este nome!");
+        }
+    }
+
+    public int getProjetosByStatus(String status, Laboratorio laboratorio) {
+        int counter = 0;
+
+        ArrayList<Projeto> projetos = laboratorio.getProjetos();
+
+        for (int i = 0; i < projetos.size(); i++) {
+            if (projetos.get(i).getStatus().equals(status)) {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    public ArrayList<Publicacao> getAllPublicacoes(Laboratorio laboratorio) {
+        ArrayList<Colaborador> colaboradores = laboratorio.getColaboradores();
+        ArrayList<Publicacao> publicacoesResultado = new ArrayList<Publicacao>();
+
+        for (int i = 0; i < colaboradores.size(); i++) {
+            ArrayList<Publicacao> publicacoesColaborador = colaboradores.get(i).getPublicacoes();
+
+            for (int j = 0; j < publicacoesColaborador.size(); j++) {
+                if (!publicacoesResultado.contains(publicacoesColaborador.get(j))) {
+                    publicacoesResultado.add(publicacoesColaborador.get(j));
+                }
+            }
+        }
+
+        return publicacoesResultado;
+    }
+
+    public int getTotalOrientacoes(Laboratorio laboratorio) {
+        int counter = 0;
+
+        ArrayList<Colaborador> colaboradores = laboratorio.getColaboradores();
+
+        for (int i = 0; i < colaboradores.size(); i++) {
+            if (colaboradores.get(i) instanceof Professor) {
+                Professor professor = (Professor)colaboradores.get(i);
+
+                counter += professor.getOrientandos().size();
+            }
+        }
+
+        return counter;
+    }
+
+    public void mostrarLaboratorio(Laboratorio laboratorio) {
+        System.out.println("Relatório de produção acadêmica do Laboratório:\n");
+
+        System.out.println("Número de colaboradores: " + laboratorio.getColaboradores().size());
+        System.out.println("Número de projeto em elaboração: " + this.getProjetosByStatus("Em elaboração", laboratorio));
+        System.out.println("Número de projeto em andamento: " + this.getProjetosByStatus("Em andamento", laboratorio));
+        System.out.println("Número de projeto concluídos: " + this.getProjetosByStatus("Concluído", laboratorio));
+        System.out.println("Número total de projeto: " + laboratorio.getProjetos().size());
+        System.out.println("Número total de Publicações: " + this.getAllPublicacoes(laboratorio).size());
+        System.out.println("Número total de Orientação: " + this.getTotalOrientacoes(laboratorio));
+        System.out.println("Número total de Produções : " + (this.getAllPublicacoes(laboratorio).size() + this.getTotalOrientacoes(laboratorio)));
     }
 }

@@ -18,7 +18,7 @@ public class Gerenciador {
 
         reader.nextLine();
     }
-    
+
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
 
@@ -83,6 +83,11 @@ public class Gerenciador {
                     waitEnter(reader);
                     break;
                 case 6:
+                    clearconsole();
+
+                    controlador.adicionarOrientacao(reader, laboratorio);
+
+                    waitEnter(reader);
                     break;
                 case 7:
                     clearconsole();
@@ -107,6 +112,11 @@ public class Gerenciador {
                     waitEnter(reader);
                     break;
                 case 9:
+                    clearconsole();
+
+                    controlador.mostrarLaboratorio(laboratorio);
+
+                    waitEnter(reader);
                     break;
                 case 0:
                     loop = false;

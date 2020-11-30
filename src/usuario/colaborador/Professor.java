@@ -27,10 +27,14 @@ public class Professor extends Colaborador {
     }
 
     public void addOrientandos(Aluno orientando) {
-        this.orientandos.add(orientando);
+        if (!this.orientandos.contains(orientando)) {
+            this.orientandos.add(orientando);
+        }
     }
 
     public void removeOrientandos(Aluno orientando) {
-        this.orientandos.remove(orientando);
+        if (this.orientandos.contains(orientando)) {
+            this.orientandos.remove(orientando);
+        }
     }
 }
