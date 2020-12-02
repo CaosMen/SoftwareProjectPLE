@@ -48,6 +48,7 @@ public class Controlador {
         System.out.println("Digite (7) para fazer a consulta de um Colaborador");
         System.out.println("Digite (8) para fazer a consulta de um Projeto");
         System.out.println("Digite (9) para gerar o relatório do Laboratório");
+        System.out.println("Digite (10) para listar todos os Colaboradores");
         System.out.println("Digite (0) para Sair!\n");
 
         System.out.print("Opção: ");
@@ -483,7 +484,7 @@ public class Controlador {
             if (orientador instanceof Professor) {
                 Professor professor = (Professor)orientador;
                 
-                System.out.print("Digite o nome do Orientando: ");
+                System.out.print("Digite o nome do colaborador que vai ser orientado pelo professor " + professor.getNome() + ": ");
                 String nomeOrientando = reader.nextLine();
 
                 Colaborador orientando = laboratorio.procurarColaborador(nomeOrientando);
@@ -568,5 +569,33 @@ public class Controlador {
         System.out.println("Número total de Publicações: " + this.getAllPublicacoes(laboratorio).size());
         System.out.println("Número total de Orientação: " + this.getTotalOrientacoes(laboratorio));
         System.out.println("Número total de Produções : " + (this.getAllPublicacoes(laboratorio).size() + this.getTotalOrientacoes(laboratorio)));
+    }
+
+    public void mostrarColaboradores(Laboratorio laboratorio) {
+        System.out.println("Lista de Colaboradores:\n");
+
+        ArrayList<Colaborador> colaboradores = laboratorio.getColaboradores();
+
+        if (!colaboradores.isEmpty()) {
+            for (int i = 0; i < colaboradores.size(); i++) {
+                Colaborador colaborador = colaboradores.get(i);
+
+                String tipo = "Colaborador";
+
+                if (colaborador instanceof Aluno) {
+                    Aluno aluno = (Aluno)colaborador;
+
+                    tipo = aluno.getTipo();
+                } else if (colaborador instanceof Pesquisador) {
+                    tipo = "Pesquisador";
+                } else if (colaborador instanceof Professor) {
+                    tipo = "Professor";
+                }
+                
+                System.out.println((i + 1) + ": Nome: " + colaborador.getNome() + ", E-mail: " + colaborador.getEmail() + ", Tipo de colaborador: " + tipo);
+            }
+        } else {
+            System.out.println("Sem colaboradores!");
+        }
     }
 }

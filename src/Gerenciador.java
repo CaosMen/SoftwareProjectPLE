@@ -118,6 +118,13 @@ public class Gerenciador {
 
                     waitEnter(reader);
                     break;
+                case 10:
+                    clearconsole();
+
+                    controlador.mostrarColaboradores(laboratorio);
+
+                    waitEnter(reader);
+                    break;
                 case 0:
                     loop = false;
                     break;
