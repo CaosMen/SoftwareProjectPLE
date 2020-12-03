@@ -1,14 +1,46 @@
-## Getting Started
+<h1 align="center">
+    <img alt="" title="" src="images/logo.png">
+</h1>
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+<h2 align="center">Sistema de Gestão de Produtividade Acadêmica</h2>
 
-## Folder Structure
+## 🔧 Recursos
+* Alocação de participantes
+* Alteração do "status" dos Projetos
+* Inclusão de informações referentes à produção acadêmica
+* Consulta por colaborador
+* Consulta por projeto
+* Relatório da produção acadêmica do laboratório
 
-The workspace contains two folders by default, where:
+## ❓ Como utilizar?
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### Requisitos
 
-## Dependency Management
+Para executar o código é necessário que o Open JDK esteja instalado em sua máquina:
 
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+```bash
+$ sudo apt-get update
+$ sudo apt-get install openjdk-8-jdk
+```
+
+sudo apt-get install openjdk-7-jdk
+
+### Execução e Instalação
+
+O primeiro passo necessário é clonar o repositório:
+
+```bash
+$ git clone https://github.com/CaosMen/SoftwareProjectPLE.git
+```
+
+Depois de ter o repósitorio clonado, execute o arquivo src/Gerenciador.java
+
+```bash
+$ javac src/Gerenciador.java
+```
+
+<br>
+
+<p align="center">
+Created by Bruno Lemos.
+</p>
