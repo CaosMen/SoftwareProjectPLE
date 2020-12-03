@@ -4,6 +4,7 @@ import controlador.*;
 import laboratorio.*;
 import projeto.*;
 import usuario.*;
+import leitor.*;
 import usuario.colaborador.*;
 
 public class Gerenciador {
@@ -23,11 +24,12 @@ public class Gerenciador {
         Scanner reader = new Scanner(System.in);
 
         Controlador controlador = new Controlador();
+        Leitor leitor = new Leitor();
 
         boolean loop = true;
 
         clearconsole();
-        Administrador administrador = controlador.cadastroAdministrador(reader);
+        Administrador administrador = controlador.cadastroAdministrador(reader, leitor);
 
         clearconsole();
         Laboratorio laboratorio = controlador.cadastroLaboratorio(reader, administrador);
@@ -36,13 +38,13 @@ public class Gerenciador {
             clearconsole();
             controlador.menuPrint(administrador);
 
-            int option = Integer.parseInt(reader.nextLine());
+            int option = leitor.readOption(reader, "Digite a opção: ", 0, 10);
 
             switch (option) {
                 case 1:
                     clearconsole();
 
-                    Colaborador novoColaborador = controlador.criarColaborador(reader, laboratorio);
+                    Colaborador novoColaborador = controlador.criarColaborador(reader, laboratorio, leitor);
 
                     if (novoColaborador != null) {
                         laboratorio.addColaborador(novoColaborador);
@@ -53,7 +55,7 @@ public class Gerenciador {
                 case 2:
                     clearconsole();
 
-                    Projeto novoProjeto = controlador.criarProjeto(reader, laboratorio);
+                    Projeto novoProjeto = controlador.criarProjeto(reader, laboratorio, leitor);
 
                     if (novoProjeto != null) {
                         laboratorio.addProjeto(novoProjeto);
@@ -78,14 +80,14 @@ public class Gerenciador {
                 case 5:
                     clearconsole();
 
-                    controlador.addPublicacao(reader, laboratorio);
+                    controlador.addPublicacao(reader, laboratorio, leitor);
 
                     waitEnter(reader);
                     break;
                 case 6:
                     clearconsole();
 
-                    controlador.adicionarOrientacao(reader, laboratorio);
+                    controlador.adicionarOrientacao(reader, laboratorio, leitor);
 
                     waitEnter(reader);
                     break;

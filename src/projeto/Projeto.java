@@ -183,18 +183,32 @@ public class Projeto {
         }
     }
 
+    public String toString(String position) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return "    [" + position + "] Título: " + this.titulo + "\n"
+             + "    Data de Ínicio: " + this.dataInicio.format(formatter) + "\n"
+             + "    Data de Termino: " + this.dataTermino.format(formatter) + "\n"
+             + "    Agência Financiadora: " + this.agenciaFinanciadora + "\n"
+             + "    Valor Financiado: R$ " + this.valorFinanciado + "\n"
+             + "    Objetivo: " + this.objetivo + "\n"
+             + "    Descrição: " + this.descricao + "\n"
+             + "    Status: " + this.status + "\n"
+             + "    Participantes: " + stringParticipantes();
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        return "Título: " + this.titulo + "\n"
-             + "Data de Ínicio: " + this.dataInicio.format(formatter) + "\n"
-             + "Data de Termino: " + this.dataTermino.format(formatter) + "\n"
-             + "Agência Financiadora: " + this.agenciaFinanciadora + "\n"
-             + "Valor Financiado: R$ " + this.valorFinanciado + "\n"
-             + "Objetivo: " + this.objetivo + "\n"
-             + "Descrição: " + this.descricao + "\n"
-             + "Status: " + this.status + "\n"
-             + "Participantes: " + stringParticipantes();
+        return "    Título: " + this.titulo + "\n"
+             + "    Data de Ínicio: " + this.dataInicio.format(formatter) + "\n"
+             + "    Data de Termino: " + this.dataTermino.format(formatter) + "\n"
+             + "    Agência Financiadora: " + this.agenciaFinanciadora + "\n"
+             + "    Valor Financiado: R$ " + this.valorFinanciado + "\n"
+             + "    Objetivo: " + this.objetivo + "\n"
+             + "    Descrição: " + this.descricao + "\n"
+             + "    Status: " + this.status + "\n"
+             + "    Participantes: " + stringParticipantes();
     }
 }

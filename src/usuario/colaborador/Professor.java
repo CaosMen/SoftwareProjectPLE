@@ -2,39 +2,47 @@ package usuario.colaborador;
 
 import publicacao.*;
 import projeto.*;
+import orientacao.*;
 
 import java.util.ArrayList;
 
 public class Professor extends Colaborador {
-    private ArrayList<Aluno> orientandos;
+    private ArrayList<Orientacao> orientacoes;
 
     public Professor(String nome, String email) {
         super(nome, email);
-        this.orientandos = new ArrayList<Aluno>();
+        this.orientacoes = new ArrayList<Orientacao>();
     }
 
     public Professor(String nome, String email, ArrayList<Publicacao> publicacoes, ArrayList<Projeto> projetos) {
         super(nome, email, publicacoes, projetos);
-        this.orientandos = new ArrayList<Aluno>();
+        this.orientacoes = new ArrayList<Orientacao>();
+    }
+    
+    public ArrayList<Orientacao> getOrientacoes() {
+        return orientacoes;
     }
 
-    public ArrayList<Aluno> getOrientandos() {
-        return orientandos;
+    public void setOrientacoes(ArrayList<Orientacao> orientacoes) {
+        this.orientacoes = orientacoes;
     }
 
-    public void setOrientandos(ArrayList<Aluno> orientandos) {
-        this.orientandos = orientandos;
-    }
+    public void addOrientacao(Orientacao orientacao) {
+        if (!this.orientacoes.contains(orientacao)) {
+            for (int i = 0; i < this.orientacoes.size(); i++) {
+                if (this.orientacoes.get(i).getAnoOrientacao() < orientacao.getAnoOrientacao()) {
+                    this.orientacoes.add(i, orientacao);
+                    return;
+                }
+            }
 
-    public void addOrientandos(Aluno orientando) {
-        if (!this.orientandos.contains(orientando)) {
-            this.orientandos.add(orientando);
+            this.orientacoes.add(orientacao);
         }
     }
 
-    public void removeOrientandos(Aluno orientando) {
-        if (this.orientandos.contains(orientando)) {
-            this.orientandos.remove(orientando);
+    public void removeOrientacao(Orientacao orientacao) {
+        if (this.orientacoes.contains(orientacao)) {
+            this.orientacoes.remove(orientacao);
         }
     }
 }

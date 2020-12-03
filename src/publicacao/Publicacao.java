@@ -82,12 +82,11 @@ public class Publicacao {
         return autoresResult;
     }
 
-    @Override
-    public String toString() {
-        return "Título: " + this.titulo + "\n"
-             + "Nome da Conferência: " + this.nomeConferencia + "\n"
-             + "Ano da Publicação: " + this.anoPublicacao + "\n"
-             + "Autores: " + stringAutores() + "\n"
-             + "Projeto associado: " + ((this.projeto == null) ? ("Sem projeto associado!") : ("\n\n" + this.projeto));
+    public String toString(String position) {
+        return "    [" + position + "] Título: " + this.titulo + "\n"
+             + "    Nome da Conferência: " + this.nomeConferencia + "\n"
+             + "    Ano da Publicação: " + this.anoPublicacao + "\n"
+             + "    Autores: " + stringAutores() + "\n"
+             + "    Projeto associado: " + ((this.projeto == null) ? ("Sem projeto associado!") : ("\n\n" + this.projeto.toString(position + ".1")));
     }
 }

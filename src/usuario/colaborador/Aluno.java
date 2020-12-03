@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Aluno extends Colaborador {
     private int tipo;
     String[] tipos = {"Aluno de Graduação", "Aluno de Mestrado", "Aluno de Doutorado"};
-    private Professor orientador = null;
 
     public Aluno(String nome, String email, int tipo) {
         super(nome, email);
@@ -26,13 +25,5 @@ public class Aluno extends Colaborador {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-    }
-
-    public Professor getOrientador() {
-        return orientador;
-    }
-
-    public void setOrientador(Professor orientador) {
-        this.orientador = orientador;
     }
 }

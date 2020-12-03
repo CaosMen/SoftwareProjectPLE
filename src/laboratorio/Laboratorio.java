@@ -66,11 +66,22 @@ public class Laboratorio {
     }
 
     public void addProjeto(Projeto novoProjeto) {
-        this.projetos.add(novoProjeto);
+        if (!this.projetos.contains(novoProjeto)) {
+            for (int i = 0; i < this.projetos.size(); i++) {
+                if (this.projetos.get(i).getDataTermino().compareTo(novoProjeto.getDataTermino()) < 0) {
+                    this.projetos.add(i, novoProjeto);
+                    return;
+                }
+            }
+
+            this.projetos.add(novoProjeto);
+        }
     }
 
     public void removeProjeto(Projeto projeto) {
-        this.projetos.remove(projeto);
+        if (this.projetos.contains(projeto)) {
+            this.projetos.remove(projeto);
+        }
     }
 
     public Projeto procurarProjeto(String titulo) {
