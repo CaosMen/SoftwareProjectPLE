@@ -203,7 +203,7 @@ public class Controlador {
             System.out.println("\n\nProdução Acadêmica:\n");
 
             for (int i = 0; i < publicacoes.size(); i++) {
-                System.out.println(publicacoes.get(i));
+                System.out.println(publicacoes.get(i).toString(String.valueOf(i + 1)));
             }
         }
 
